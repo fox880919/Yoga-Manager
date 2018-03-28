@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     let mainViewModel = MainViewModel()
     
+    var lastRowPosition = 0
    
     
     override func viewDidLoad() {
@@ -37,18 +38,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
-        return mainViewModel.getGroups().count
+        if(mainViewModel.getGroups().count > 0)
+        {
+            lastRowPosition = mainViewModel.getGroups().count
+        }
+    
+        return mainViewModel.getGroups().count + 1
+        
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier")! //1.
+        
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell1")! //1.
+        
+        var text = String()
+
+        if(indexPath.row == lastRowPosition)
+        {
+           text = "Add a new group"
+        }
+        
+        else{
         
          let groups = mainViewModel.getGroups() 
         
-        let text = groups[indexPath.row].name //2.
+        text = groups[indexPath.row].name! //2.
+        }
         
-        cell.textLabel?.text = text! //3.
+        cell.textLabel?.text = text //3.
         
         return cell //4.
     }
