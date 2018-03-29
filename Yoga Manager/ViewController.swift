@@ -71,5 +71,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         return cell //4.
     }
+    
+    
+        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+        {
+            if (indexPath.row == lastRowPosition)
+            {
+                
+            }
+        }
+    
+    
+    
 }
 
